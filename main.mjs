@@ -6,10 +6,11 @@ const apiURL = "https://jsonplaceholder.typicode.com";
 
 // function to get data from API
 const getPosts = () => {
-    fetch(apiURL + "/posts")
+    fetch(apiURL + "/posts/1")
     .then(response => response.json()) // returns a promise that parses json into JS object
     .then(data => {
         console.log("Response after GET: ", data);
+        return data;
     })
     .catch(error => {
         console.error(error);
@@ -43,4 +44,5 @@ const createPost = (post) => {
 
 // call the functions
 getPosts();
+// createPost(post);
 createPost(post);
