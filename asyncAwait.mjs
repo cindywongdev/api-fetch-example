@@ -5,11 +5,11 @@ import fetch from 'node-fetch';
 const apiURL = "https://jsonplaceholder.typicode.com";
 
 // function to get data from API
-const getPost = async () => {
+const getPosts = async () => {
     try {
-    const response = await fetch(apiURL + "/posts/1");
+    const response = await fetch(apiURL + "/posts");
     const data = await response.json(); // returns a promise that parses json into JS object
-    console.log("Response after GET: ", data);
+    // console.log("Response after GET: ", data);
         return data;
     } catch (error) {
         console.error(error);
@@ -44,11 +44,17 @@ const createPost = async (post) => {
     }
 }
 
-const changePostBody = async () => {
-    const post = await getPost();
-    post.body = 'hiii';
-    const createdPost = await createPost(post);
-    console.log("created POSTTT: ", createdPost);
+// const changePostBody = async () => {
+//     const post = await getPost();
+//     post.body = 'hiii';
+//     const createdPost = await createPost(post);
+//     console.log("created POSTTT: ", createdPost);
+// }
+
+const getPostsWithShortTitle = async () => {
+    const allPosts = await getPosts();
+    const shortTitlePosts = allPosts.filter((post) => post.title.length < 20);
+    console.log(shortTitlePosts);
 }
 
 // // call the functions
@@ -56,4 +62,6 @@ const changePostBody = async () => {
 // // createPost(post);
 // createPost(post);
 
-changePostBody();
+// changePostBody();
+
+getPostsWithShortTitle();
